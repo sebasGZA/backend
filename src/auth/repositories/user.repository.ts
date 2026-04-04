@@ -30,6 +30,7 @@ export class UserRepository extends Repository<User> {
                 name,
                 password,
                 isActive: true,
+                createdAt: new Date(),
             })
             await this.save(user);
             return {
