@@ -19,6 +19,7 @@ export class UserRepository extends Repository<User> {
                 id: true,
                 email: true,
                 password: true,
+                isActive: true,
             }
         })
     }
