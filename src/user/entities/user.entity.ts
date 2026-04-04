@@ -10,6 +10,9 @@ export class User {
     @Column('varchar')
     email: string;
 
+    @Column('varchar')
+    password: string;
+
     @Column('varchar', {
         unique: true
     })
