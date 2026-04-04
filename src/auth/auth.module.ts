@@ -6,8 +6,8 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 
 import { AuthService } from "./services/auth.service";
 import { AuthController } from "./controllers/auth.controller";
-import { User } from "./entities/user.entity";
-import { UserRepository } from "./repositories/user.repository";
+import { User } from "../user/entities/user.entity";
+import { UserRepository } from "../user/repositories/user.repository";
 
 @Module({
     imports: [

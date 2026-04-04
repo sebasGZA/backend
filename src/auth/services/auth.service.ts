@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import * as bcrypt from 'bcrypt';
 
-import { UserRepository } from "../repositories/user.repository";
+import { UserRepository } from "../../user/repositories/user.repository";
 import { LoginDto } from "../dtos/login.dto";
 import { CreateUserDto } from "../dtos/create-user.dto";
 import { JwtPayload } from "../interfaces/jwt.interface";
-import { User } from "../entities/user.entity";
+import { User } from "../../user/entities/user.entity";
 import { JwtService } from "@nestjs/jwt";
 
 @Injectable()

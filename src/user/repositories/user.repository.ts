@@ -2,7 +2,8 @@ import { BadRequestException, Injectable, InternalServerErrorException } from "@
 import { Repository, DataSource } from "typeorm";
 
 import { User } from "../entities/user.entity";
-import { CreateUserDto } from "../dtos/create-user.dto";
+import { CreateUserDto } from "../../auth/dtos/create-user.dto";
+import { PaginationDto } from "src/shared/dtos/pagination.dto";
 
 @Injectable()
 export class UserRepository extends Repository<User> {
@@ -40,6 +41,23 @@ export class UserRepository extends Repository<User> {
         } catch (err) {
             this.handleErrors(err);
         }
+    }
+
+    getUsers({ limit, offset }: PaginationDto) {
+        return this.find({
+            take: limit,
+            skip: offset,
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                isActive: true,
+            },
+        });
+    }
+
+    getUserById(id: number) {
+        return this.findOne({ where: { id }, select: { id: true, name: true, isActive: true, email: true } })
     }
 
     private handleErrors(error: any) {
