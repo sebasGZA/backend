@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { Post } from '../../post/entities/post.entity';
-import { User } from '../../user/entities/user.entity';
+import { User } from '../../auth/entities/user.entity';
 
 import { DataSource } from "typeorm";
 
