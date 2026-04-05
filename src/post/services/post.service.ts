@@ -1,9 +1,10 @@
 import { PaginationDto } from "src/shared/dtos/pagination.dto";
 import { CreatePostDto } from "../dtos/create-post.dto";
 import { PostRepository } from "../repositories/post.repository";
-import { InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { UpdatePostDto } from "../dtos/update-post.dto";
 
+@Injectable()
 export class PostService {
     constructor(private readonly postRepository: PostRepository) { }
 

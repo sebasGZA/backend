@@ -11,7 +11,10 @@ import { JwtService } from "@nestjs/jwt";
 @Injectable()
 export class AuthService {
 
-    constructor(private readonly userRepository: UserRepository, private readonly jwtService: JwtService,) { }
+    constructor(
+        private readonly userRepository: UserRepository, 
+        private readonly jwtService: JwtService,
+    ) { }
 
     async getUserLogin({ email, password }: LoginDto) {
         const user = await this.userRepository.findByEmail(email);

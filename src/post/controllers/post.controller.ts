@@ -1,10 +1,21 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
+import { 
+    Body, 
+    Controller, 
+    Delete, 
+    Get, 
+    Param, 
+    Patch, 
+    Post, 
+    Query, 
+} from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 import { CreatePostDto } from "../dtos/create-post.dto";
 import { PostService } from "../services/post.service";
-import { PaginationDto } from "src/shared/dtos/pagination.dto";
+import { PaginationDto } from "../../shared/dtos/pagination.dto";
 import { UpdatePostDto } from "../dtos/update-post.dto";
+import { GetUser } from "../../auth/decorators/get-user.decorator";
+import { User } from "../../user/entities/user.entity";
 
 @ApiTags('Post')
 @ApiBearerAuth()
@@ -13,8 +24,8 @@ export class PostController {
     constructor(private readonly postService: PostService) { }
 
     @Post()
-    createPost(@Body() createPostDto: CreatePostDto) {
-        return this.postService.createPost(createPostDto, 2)
+    createPost(@Body() createPostDto: CreatePostDto, @GetUser() { id }: User) {
+        return this.postService.createPost(createPostDto, id)
     }
 
     @Get()

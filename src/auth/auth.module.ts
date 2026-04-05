@@ -8,6 +8,7 @@ import { AuthService } from "./services/auth.service";
 import { AuthController } from "./controllers/auth.controller";
 import { User } from "../user/entities/user.entity";
 import { UserRepository } from "../user/repositories/user.repository";
+import { JwtStrategy } from "./strategies/jwt.strategy";
 
 @Module({
     imports: [
@@ -30,7 +31,7 @@ import { UserRepository } from "../user/repositories/user.repository";
         }),
     ],
     controllers: [AuthController],
-    providers: [AuthService, UserRepository],
-    exports: [TypeOrmModule]
+    providers: [AuthService, UserRepository, JwtStrategy],
+    exports: [TypeOrmModule, JwtStrategy, PassportModule, JwtModule]
 })
 export class AuthModule { }
