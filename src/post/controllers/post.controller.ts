@@ -6,7 +6,8 @@ import {
     Param, 
     Patch, 
     Post, 
-    Query, 
+    Query,
+    UseGuards, 
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
@@ -16,10 +17,12 @@ import { PaginationDto } from "../../shared/dtos/pagination.dto";
 import { UpdatePostDto } from "../dtos/update-post.dto";
 import { GetUser } from "../../auth/decorators/get-user.decorator";
 import { User } from "../../user/entities/user.entity";
+import { AuthGuard } from "@nestjs/passport";
 
 @ApiTags('Post')
 @ApiBearerAuth()
 @Controller('posts')
+@UseGuards(AuthGuard())
 export class PostController {
     constructor(private readonly postService: PostService) { }
 
