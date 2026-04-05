@@ -6,7 +6,12 @@ import { swaggerConfiguration } from './shared/swagger/config/swagger.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const port = parseInt(process.env.PORT || '3000');
+  const port = parseInt(process.env.PORT || '8080');
+
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  });
   swaggerConfiguration(app);
   app.setGlobalPrefix('api');
   app.useGlobalPipes(
