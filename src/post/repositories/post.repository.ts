@@ -38,7 +38,9 @@ export class PostRepository extends Repository<Post> {
                 id: true,
                 title: true,
                 content: true,
-                user: true
+                user: {
+                    id: true
+                }
             }
         },)
     }
@@ -55,7 +57,9 @@ export class PostRepository extends Repository<Post> {
                 id: true,
                 title: true,
                 content: true,
-                user: true,
+                user: {
+                    id: true
+                },
             },
         });
     };

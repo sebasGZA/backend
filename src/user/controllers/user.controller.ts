@@ -12,12 +12,12 @@ import { PaginationDto } from "../../shared/dtos/pagination.dto";
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
-    @Get()
+    @Get('saved')
     findUsers(@Query() paginationDto: PaginationDto) {
         return this.userService.findUsers(paginationDto)
     }
 
-    @Get(':id')
+    @Get('saved/:id')
     findUserById(@Param('id') id: number) {
         return this.userService.findById(id)
     }
