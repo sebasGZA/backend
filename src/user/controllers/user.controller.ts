@@ -1,11 +1,14 @@
-import { Controller, Get, Param, Query } from "@nestjs/common";
-import { UserService } from "../services/user.service";
+import { Controller, Get, Param, Query, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { PaginationDto } from "src/shared/dtos/pagination.dto";
+
+import { UserService } from "../services/user.service";
+import { PaginationDto } from "../../shared/dtos/pagination.dto";
 
 @ApiTags('User')
 @ApiBearerAuth()
 @Controller('users')
+@UseGuards(AuthGuard())
 export class UserController {
     constructor(private readonly userService: UserService) { }
 
