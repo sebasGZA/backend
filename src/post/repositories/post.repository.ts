@@ -27,8 +27,8 @@ export class PostRepository extends Repository<Post> {
         }
     }
 
-    getPosts({ limit, offset }: PaginationDto) {
-        return this.find({
+    async getPosts({ limit, offset }: PaginationDto) {
+        const posts = await this.find({
             take: limit,
             skip: offset,
             relations: {
@@ -38,15 +38,22 @@ export class PostRepository extends Repository<Post> {
                 id: true,
                 title: true,
                 content: true,
+                createdAt: true,
                 user: {
-                    id: true
-                }
+                    id: true,
+                    name: true,
+                },
             }
-        },)
+        });
+        return posts.map(({ user, ...post }) => ({
+            ...post,
+            userId: user.id,
+            userName: user.name,
+        }));
     }
 
-    getPostById(id: number) {
-        return this.findOne({
+    async getPostById(id: number) {
+        const post = await this.findOne({
             where: {
                 id,
             },
@@ -57,11 +64,18 @@ export class PostRepository extends Repository<Post> {
                 id: true,
                 title: true,
                 content: true,
+                createdAt: true,
                 user: {
-                    id: true
+                    id: true,
+                    name: true,
                 },
             },
         });
+        return {
+            ...post,
+            userId: post?.user.id,
+            userName: post?.user.name
+        };
     };
 
 }
