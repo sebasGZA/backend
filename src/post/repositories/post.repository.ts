@@ -51,8 +51,8 @@ export class PostRepository extends Repository<Post> {
         }));
     }
 
-    async getPostById(id: number) {
-        const post = await this.findOne({
+    getPostById(id: number) {
+        return this.findOne({
             where: {
                 id,
             },
@@ -70,11 +70,7 @@ export class PostRepository extends Repository<Post> {
                 },
             },
         });
-        return {
-            ...post,
-            userId: post?.user.id,
-            userName: post?.user.name
-        };
+
     };
 
 }

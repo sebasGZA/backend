@@ -19,20 +19,26 @@ export class PostService {
     async getPostById(id: number) {
         const post = await this.postRepository.getPostById(id);
         if (!post) throw new NotFoundException('Post not found');
-        return post;
+        return {
+            ...post,
+            userId: post?.user.id,
+            userName: post?.user.name
+        };;
     }
 
     async patchPost(id: number, updateDto: UpdatePostDto) {
         try {
-            const postDb = await this.getPostById(id);
+            const postDb = await this.postRepository.getPostById(id);
+            if (!postDb) throw new NotFoundException('Post not found');
             const postToUpdate = {
                 ...postDb,
                 ...updateDto,
                 id,
             };
             await this.postRepository.update(id, postToUpdate)
-            return this.getPostById(id);
+            return this.postRepository.getPostById(id);
         } catch (err) {
+            console.log(err);
             throw new InternalServerErrorException('Error updating post, call admin');
         }
     }
