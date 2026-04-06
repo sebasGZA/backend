@@ -40,7 +40,6 @@ export class PostRepository extends Repository<Post> {
                 content: true,
                 createdAt: true,
                 user: {
-                    id: true,
                     name: true,
                 },
             }
