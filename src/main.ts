@@ -6,6 +6,7 @@ import { swaggerConfiguration } from './shared/swagger/config/swagger.config';
 import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
   const app = await NestFactory.create(AppModule);
   const port = parseInt(process.env.PORT || '8080');
 
