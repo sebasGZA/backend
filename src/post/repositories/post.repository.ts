@@ -1,9 +1,9 @@
 import { DataSource, Repository } from "typeorm";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
+
 import { Post } from "../entities/post.entity";
-import { BadRequestException, Injectable, InternalServerErrorException } from "@nestjs/common";
 import { CreatePostDto } from "../dtos/create-post.dto";
-import { title } from "process";
-import { PaginationDto } from "src/shared/dtos/pagination.dto";
+import { PaginationDto } from "../../shared/dtos/pagination.dto";
 
 @Injectable()
 export class PostRepository extends Repository<Post> {
