@@ -3,7 +3,7 @@ import { Repository, DataSource } from "typeorm";
 
 import { User } from "../entities/user.entity";
 import { CreateUserDto } from "../../auth/dtos/create-user.dto";
-import { PaginationDto } from "src/shared/dtos/pagination.dto";
+import { PaginationDto } from "../../shared/dtos/pagination.dto";
 
 @Injectable()
 export class UserRepository extends Repository<User> {

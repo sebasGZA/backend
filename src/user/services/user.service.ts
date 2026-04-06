@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { UserRepository } from "../repositories/user.repository";
-import { PaginationDto } from "src/shared/dtos/pagination.dto";
+import { PaginationDto } from "../../shared/dtos/pagination.dto";
 
 @Injectable()
 export class UserService {

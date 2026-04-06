@@ -1,4 +1,4 @@
-import { PaginationDto } from "src/shared/dtos/pagination.dto";
+import { PaginationDto } from "../../shared/dtos/pagination.dto";
 import { CreatePostDto } from "../dtos/create-post.dto";
 import { PostRepository } from "../repositories/post.repository";
 import { Injectable, InternalServerErrorException, NotFoundException } from "@nestjs/common";
