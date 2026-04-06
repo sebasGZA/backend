@@ -38,7 +38,6 @@ export class PostService {
             await this.postRepository.update(id, postToUpdate)
             return this.postRepository.getPostById(id);
         } catch (err) {
-            console.log(err);
             throw new InternalServerErrorException('Error updating post, call admin');
         }
     }

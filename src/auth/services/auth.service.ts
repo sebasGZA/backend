@@ -19,8 +19,11 @@ export class AuthService {
 
     async getUserLogin(res: Response, { email, password }: LoginDto) {
         const user = await this.userRepository.findByEmail(email);
-        if (!user || !user.isActive || !bcrypt.compareSync(password, user.password))
+        if (!user || !user.isActive)
             throw new BadRequestException('The credentials are incorrect');
+
+        const isVaild = await bcrypt.compare(password, user.password)
+        if (!isVaild) throw new BadRequestException('The credentials are incorrect');
 
         const token = this.generateCookie(res, user.id);
         return {
@@ -34,7 +37,7 @@ export class AuthService {
         const userDb = await this.userRepository.findByEmail(email);
         if (userDb) throw new BadRequestException('User already exists');
 
-        const newPassword = bcrypt.hashSync(password, 10);
+        const newPassword = await bcrypt.hash(password, 10);
         const newUser = await this.userRepository.createUser({ email, name, password: newPassword })
         const userId = newUser?.id
         const token = this.generateCookie(res, userId!);
@@ -58,7 +61,7 @@ export class AuthService {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'lax',
-            maxAge: 1000 * 60 * 60 * 24, // 1 day
+            maxAge: 1000 * 60 * 60 * 24,
         });
         return token;
     }

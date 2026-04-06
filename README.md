@@ -39,4 +39,9 @@ npm run migration:run
 npm run start:dev
 ```
 
+## Running test with jest
+```bash
+npm run test:watch
+```
+
 
